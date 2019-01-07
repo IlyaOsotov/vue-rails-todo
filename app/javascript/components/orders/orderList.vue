@@ -28,19 +28,22 @@
       <div slot-scope="{data}">
         <vs-tr :data="tr" :key="indextr" v-for="(tr, indextr) in data" >
           <vs-td :data="tr.email">
-            {{tr.email}}
+            {{tr.id}}
           </vs-td>
 
-          <vs-td :data="tr.username">
+          <vs-td :data="tr.name">
             {{tr.name}}
           </vs-td>
 
-          <vs-td :data="tr.website">
-            {{tr.website}}
+          <vs-td :data="tr.price">
+            {{tr.price}}
           </vs-td>
 
-          <vs-td :data="tr.id">
-            {{tr.id}}
+          <vs-td :data="tr.delivery_date">
+            {{tr.delivery_date}}
+          </vs-td>
+          <vs-td :data="tr.delivery_type">
+            {{tr.delivery_type}}
           </vs-td>
 
           <div class="expand-user" slot="expand">

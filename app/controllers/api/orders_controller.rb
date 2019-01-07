@@ -5,5 +5,9 @@ module Api
         format.json { render json: Order.all }
       end
     end
+
+    def create
+      
+    end
   end
 end

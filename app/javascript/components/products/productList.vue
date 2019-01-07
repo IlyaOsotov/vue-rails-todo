@@ -21,15 +21,15 @@
 
       <div slot-scope="{data}">
         <vs-tr :data="tr" :key="indextr" v-for="(tr, indextr) in data" >
-          <vs-td :data="tr.email">
+          <vs-td :data="tr.id">
             {{tr.id}}
           </vs-td>
 
-          <vs-td :data="tr.username">
+          <vs-td :data="tr.name">
             {{tr.name}}
           </vs-td>
 
-          <vs-td :data="tr.website">
+          <vs-td :data="tr.price">
             {{tr.price}}
           </vs-td>
 
