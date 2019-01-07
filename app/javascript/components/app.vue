@@ -1,16 +1,22 @@
 <template>
   <div id='app'>
-    <p>{{ message }}</p>
+    <navbar></navbar>
+    <main-component></main-component>
   </div>
 </template>
 
 <script>
+  import mainComponent from './mainComponent.vue'
+  import navbar from './navbar.vue'
   export default {
     data: function () {
       return {
-        message: "Hello world!"
       }
-    }
+    },
+    components: {
+      navbar: navbar,
+      mainComponent: mainComponent
+    },
   }
 </script>
 
