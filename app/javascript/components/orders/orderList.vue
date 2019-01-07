@@ -71,15 +71,44 @@
         </vs-tr>
       </div>
     </vs-table>
+    <vs-pagination :total="this.max" v-model="currentx" :max="this.max"></vs-pagination>
   </div>
 </template>
 
 <script>
-export default {
-  data:()=>({
-    orders: []
-  })
-}
+  import axios from 'axios'
+
+  export default {
+    data:()=>({
+      orders: [],
+      currentx: 1,
+      max: 1
+    }),
+    mounted: function () {
+      var that;
+      that = this;
+      axios.get(`api/orders.json`)
+        .then(response => {
+          that.orders = response.data.data;
+          that.max = response.data.total;
+      });
+    },
+    watch: {
+      currentx: function(val) {
+        var that;
+        that = this;
+        axios.get(`api/orders.json`, { params: 
+                                        { 
+                                          page: val
+                                        }
+                                      })
+          .then(response => {
+            that.orders = response.data.data;
+            that.max = response.data.total;        
+        });
+      }
+    }
+  }
 </script>
 
 <style lang="scss">
