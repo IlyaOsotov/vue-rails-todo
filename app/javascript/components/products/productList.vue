@@ -1,13 +1,13 @@
 <template lang="html">
-  <div>
+  <div class="base-table">
     <vs-table
       :data="products">
-      <div slot="header">
+      <template slot="header">
         <h3>
           Products
         </h3>
-      </div>
-      <div slot="thead">
+      </template>
+      <template slot="thead">
         <vs-th>
           Id
         </vs-th>
@@ -17,9 +17,9 @@
         <vs-th>
           Price
         </vs-th>
-      </div>
+      </template>
 
-      <div slot-scope="{data}">
+      <template slot-scope="{data}">
         <vs-tr :data="tr" :key="indextr" v-for="(tr, indextr) in data" >
           <vs-td :data="tr.id">
             {{tr.id}}
@@ -33,30 +33,18 @@
             {{tr.price}}
           </vs-td>
 
-          <div class="expand-user" slot="expand">
-            <div class="con-expand-users">
-              <div class="con-btns-user">
-                <div class="con-userx">
-                  <vs-avatar :badge="tr.id" size="45px" :src="`https://randomuser.me/api/portraits/women/${indextr}.jpg`"/>
-                  <span>
-                    {{ tr.name }}
-                  </span>
-                </div>
-
+          <template class="expand-product" slot="expand">
+            <div class="con-expand-products">
+              <div class="con-btns-product">
                 <div>
-                  <vs-button vs-type="border" size="small" icon="phone_in_talk"></vs-button>
                   <vs-button vs-type="gradient" size="small" color="success" icon="send"></vs-button>
                   <vs-button vs-type="flat" size="small" color="danger" icon="delete_sweep"></vs-button>
                 </div>
               </div>
-              <vs-list>
-                <vs-list-item icon="mail" title="Email" :subtitle="tr.email"></vs-list-item>
-                <vs-list-item icon="check" title="Website" :subtitle="tr.website"></vs-list-item>
-              </vs-list>
             </div>
-          </div>
+          </template>
         </vs-tr>
-      </div>
+      </template>
     </vs-table>
     <vs-pagination :total="this.max" v-model="currentx" :max="this.max"></vs-pagination>
   </div>
@@ -101,17 +89,16 @@
 </script>
 
 <style lang="scss">
-.con-expand-users {
-  .con-btns-user {
+.con-expand-products {
+  .con-btns-product {
     display: flex;
-    padding: 10px;
     padding-bottom: 0px;
-    align-items: right;
-    justify-content: space-between;
-    .con-userx {
+    align-items: center;
+    justify-content: center;
+    .con-productx {
       display: flex;
       align-items: center;
-      justify-content: flex-start;
+      justify-content: center;
     }
   }
   .list-icon {

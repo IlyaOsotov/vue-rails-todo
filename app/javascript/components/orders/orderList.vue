@@ -2,12 +2,13 @@
   <div>
     <vs-table
       :data="orders">
-      <div slot="header">
+      <template slot="header">
         <h3>
           Заказы
         </h3>
-      </div>
-      <div slot="thead">
+        <vs-button color="primary" type="filled" @click="LinkToNewOrder">Добавить заказ</vs-button>
+      </template>
+      <template slot="thead">
         <vs-th>
           Id
         </vs-th>
@@ -21,12 +22,17 @@
           Дата доставки
         </vs-th>
         <vs-th>
-          Тип доставки
+          Статус
         </vs-th>
-      </div>
+      </template>
 
-      <div slot-scope="{data}">
-        <vs-tr :data="tr" :key="indextr" v-for="(tr, indextr) in data" >
+      <template slot-scope="{data}">
+        <vs-tr
+          :state="tr.status == 'archived' ? 'danger' : null" 
+          :data="tr"
+          :key="indextr"
+          v-for="(tr, indextr) in data"
+        >
           <vs-td :data="tr.email">
             {{tr.id}}
           </vs-td>
@@ -42,34 +48,22 @@
           <vs-td :data="tr.delivery_date">
             {{tr.delivery_date}}
           </vs-td>
-          <vs-td :data="tr.delivery_type">
-            {{tr.delivery_type}}
+          <vs-td :data="tr.status">
+            {{tr.status}}
           </vs-td>
 
-          <div class="expand-user" slot="expand">
-            <div class="con-expand-users">
-              <div class="con-btns-user">
-                <div class="con-userx">
-                  <vs-avatar :badge="tr.id" size="45px" :src="`https://randomuser.me/api/portraits/women/${indextr}.jpg`"/>
-                  <span>
-                    {{ tr.name }}
-                  </span>
-                </div>
-
+          <template class="expand-order" slot="expand">
+            <div class="con-expand-orders">
+              <div class="con-btns-order">
                 <div>
-                  <vs-button vs-type="border" size="small" icon="phone_in_talk"></vs-button>
                   <vs-button vs-type="gradient" size="small" color="success" icon="send"></vs-button>
                   <vs-button vs-type="flat" size="small" color="danger" icon="delete_sweep"></vs-button>
                 </div>
               </div>
-              <vs-list>
-                <vs-list-item icon="mail" title="Email" :subtitle="tr.email"></vs-list-item>
-                <vs-list-item icon="check" title="Website" :subtitle="tr.website"></vs-list-item>
-              </vs-list>
             </div>
-          </div>
+          </template>
         </vs-tr>
-      </div>
+      </template>
     </vs-table>
     <vs-pagination :total="this.max" v-model="currentx" :max="this.max"></vs-pagination>
   </div>
@@ -93,6 +87,11 @@
           that.max = response.data.total;
       });
     },
+    methods: {
+      LinkToNewOrder() {
+        this.$router.push({ name: 'newOrder' })
+      }
+    },
     watch: {
       currentx: function(val) {
         var that;
@@ -112,17 +111,17 @@
 </script>
 
 <style lang="scss">
-.con-expand-users {
-  .con-btns-user {
+.con-expand-orders {
+  .con-btns-order {
     display: flex;
     padding: 10px;
     padding-bottom: 0px;
-    align-items: right;
-    justify-content: space-between;
-    .con-userx {
+    align-items: center;
+    justify-content: center;
+    .con-orderx {
       display: flex;
       align-items: center;
-      justify-content: flex-start;
+      justify-content: center;
     }
   }
   .list-icon {

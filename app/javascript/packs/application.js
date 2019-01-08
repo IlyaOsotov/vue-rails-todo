@@ -14,7 +14,7 @@ const router = new VueRouter({
   routes: Routes.routes,
 });
 
-router.replace('/orders');
+//router.replace('/orders');
 
 document.addEventListener('DOMContentLoaded', () => {
   const el = document.body.appendChild(document.createElement('application'))
